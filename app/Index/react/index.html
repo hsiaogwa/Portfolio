@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="portfolio, personal, projects, web developer, Alven, HsiaoGwa" />
+  <title>Personal Portfolio - Alven</title>
+  <link rel="shortcut icon" href="/favicon" type="image/png">
+  <link rel="stylesheet" href="/style">
+  <link rel="stylesheet" href="/theme">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="logo container sm">LOGO</div>
+      <div class="container sm button set">
+        <div class="button set show-lg">
+          <a href="#" data-i18n="HEAD_HOME">Home</a>
+          <a href="#" data-i18n="HEAD_ABOUT">About</a>
+          <a href="#" data-i18n="HEAD_PROJECTS">Projects</a>
+          <a href="#" data-i18n="HEAD_CONTACT">Contact</a>
+        </div>
+        <div class="button set show-sm">
+          <icon data-icon-src="public/arrowTop.svg" onclick="document.getElementById('header_small_ls').classList.toggle('show-never'); document.getElementById('header_small_ls').focus()"></icon>
+        </div>
+        <div class="button set show-also">
+          <icon data-icon-src="public/lang.svg" onclick="document.getElementById('lang_selector').classList.toggle('show-never'); document.getElementById('lang_selector').focus()"></icon>
+        </div>
+      </div>
+    </nav>
+    <ol id="header_small_ls" class="show-never dragging" tabindex="0" onblur="this.classList.add('show-never')">
+      <li><a data-i18n="HEAD_HOME">Home</a></li>
+      <li><a data-i18n="HEAD_ABOUT">About</a></li>
+      <li><a data-i18n="HEAD_PROJECTS">Projects</a></li>
+      <li><a data-i18n="HEAD_CONTACT">Contact</a></li>
+    </ol>
+    <ol id="lang_selector" class="show-never dragging" tabindex="0" onblur="this.classList.add('show-never')"></ol>
+  </header>
+
+  <main>
+
+    <section class="hero container hl">
+      <div class="text">
+        <h1>Hello, I'm Alven</h1>
+        <p id="togtip">LODDING</p>
+        <button data-i18n="HERO_BTN" onclick="window.location.href = 'https:\/\/discord.gg\/pX8YKeBJ'">Contact Me</button>
+      </div>
+      <div class="image">
+        <img src="./public/hsiaogwa.jpg" alt="Profile Picture" />
+      </div>
+    </section>
+
+    <section id="desc" class="container">
+      <div class="text">
+        <h2 data-i18n="DESC_TITLE">Description</h2>
+        <p data-i18n="DESC_INNER">Introduction text goes here.</p>
+      </div>
+    </section>
+
+    <section id="whatson" class="container">
+      <div class="text">
+        <h2 data-i18n="WHATS_TITLE">What's running now</h2>
+        <small data-i18n="WHATS_DESC">To check what's running on my server now...</small>
+        <div id="running" class="button hl set"></div>
+      </div>
+      <div class="card set" id="running"></div>
+    </section>
+
+    <section id="news" class="container">
+      <div class="text">
+        <h2 data-i18n="NEWS_TITLE">News</h2>
+        <small data-i18n="NEWS_DESC">What's happened...</small>
+      </div>
+      <div class="card set" id="news"></div>
+    </section>
+
+    <section id="project" class="container">
+      <div class="text">
+        <h2 data-i18n="PROJ_TITLE">Projects</h2>
+        <small data-i18n="PROJ_DESC">To explor my personal projects...</small>
+      </div>
+      <div class="card set" id="projects"></div>
+    </section>
+
+    <section class="container" id="find">
+      <div class="text">
+        <h2 data-i18n="FIND">Find Me</h2>
+      </div>
+      <!--<iframe class="link set" src="./public/portaly.min.html" id="portaly" scrolling="no"></iframe>-->
+      <div class="card set" id="socials">
+        <div class="card item">
+          <icon data-icon-src="public/discord.svg"></icon>
+          <h2>Discord</h2>
+          <p>Alven</p>
+          <div>
+            <small>a|b</small>
+          </div>
+          <div class="button set">
+            <button type="button">ba</button>
+          </div>
+        </div>
+        <div class="card item">
+          <icon data-icon-src="public/github.svg"></icon>
+          <h2>GitHub</h2>
+          <p>HsiaoGwa</p>
+          <div>
+            <small>github.com/HsiaoGwa</small>
+          </div>
+          <div class="button set">
+            <button type="button">ab</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy;&nbsp; <span id="year"></span>&nbsp; HsiaoGwa</p>
+    <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>

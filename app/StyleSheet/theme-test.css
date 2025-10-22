@@ -1,0 +1,14 @@
+/* 主題色與字體定義 */
+:root {
+	--primary: #6c63ff;
+	--secondary: #ff6584;
+	--theme-front: var(--white);
+	--primary-front: var(--white);
+	--secondary-front: var(--white);
+	--bg-color: var(--white);
+	--bg-color-lowlight: var(--white-light);
+	--bg-color-highlight: var(--white-shadow);
+	--front-color: (--black);
+	--text-color: var(--black);
+	--font-static: 'Segoe UI', Arial, sans-serif;
+}

@@ -1,0 +1,28 @@
+services:
+
+  appIndex:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: Index
+    image: webapp/index:1.0
+    ports:
+      - "8000-8004:8000-8004"
+
+  appGame:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: Game
+    image: webapp/game:1.0
+    ports:
+      - "8010-8014:8010-8014"
+
+  apiStyleSheet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: StyleSheet
+    image: webapp/stylesheet:1.0
+    ports:
+      - "8020-8024:8020-8024"

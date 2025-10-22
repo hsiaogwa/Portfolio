@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+    "target": "es2020",               // JS版本：推薦ES6以上，瀏覽器支援好
+    "module": "es2020",              // 模組系統：推薦ES6以上，瀏覽器支援好
+    "lib": ["dom", "es6"],        // 編譯時包含的函式庫
+    "moduleResolution": "node", // 模組解析方式：推薦node
+    "outDir": "./classes",              // 編譯後輸出目錄
+    "rootDir": "./types",              // 原始TS檔所在資料夾
+    "sourceMap": false,            // 可關掉sourcemap
+    "checkJs": false,             // 不檢查JS檔
+    "esModuleInterop": true,        // 允許使用 CommonJS 模組（require）與 ES Module（import）互通
+    "forceConsistentCasingInFileNames": true,    // 確保檔名大小寫一致（跨平台一致性）
+  },
+  "include": ["./types/**/*"],  // 編譯所有types資料夾下的TS檔
+  "exclude": ["./classes", "./types/**/*.disabled"] // 排除編譯classes資料夾和.disabled結尾的檔案
+}

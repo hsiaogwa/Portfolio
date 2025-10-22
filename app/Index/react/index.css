@@ -1,0 +1,15 @@
+
+#portaly {
+	border-radius: 2em;
+	background:none !important;
+	overflow: hidden;
+	height: 16em;
+}
+
+#portaly::-webkit-scrollbar {
+	display: none;
+}
+
+#togtip {
+	min-height: 3em;
+}

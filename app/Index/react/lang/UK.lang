@@ -1,0 +1,26 @@
+{
+	"HERO_TIPS": [
+		"Program Developer",
+		"Software Learner",
+		"Full Stack",
+		"Python WEB",
+		"Full Stack Sercurity Engineer",
+		"China English Test Level 4",
+		"Province Secondary Prize",
+		"Lucky Boy who was Born on Mother's Day"
+	],
+	"HERO_BTN": "Discord Account",
+	"DESC_TITLE": "Description",
+	"DESC_INNER": "Hello, I'm Alven! You can also call me HsiaoGwa (in Chinese). I love music. I'm a passionater about programming and a Harry Potter Fan. Whatelse, I also love Minecraft (Furry sometimes). Here, you’ll find my basic info—looking forward to hearing from you in due time.",
+	"WHATS_TITLE": "Servicing Now",
+	"WHATS_DESC": "Here you can check what the server is running on the server now.",
+	"PROJ_TITLE": "Personal Projects",
+	"PROJ_DESC": "Here you'll find my personal projects.",
+	"NEWS_TITLE": "News",
+	"NEWS_DESC": "Our news nowadays.",
+	"FIND": "Find Me",
+	"HEAD_HOME": "HOME",
+	"HEAD_PROJECTS": "PROJECTS",
+	"HEAD_ABOUT": "ABOUT",
+	"HEAD_CONTACT": "CONTACT"
+}
