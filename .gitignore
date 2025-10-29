@@ -1,13 +1,19 @@
-venv/
-
-
+# Python
+## virtual environment
+.venv/
+## Cache files and directories
 __pycache__/
 *.pyc
 
+# distribution/build files
+dist/
+build/
+classes/
 
+# Editor directories
 .idea/
 .vscode/
 
-
+# environment variables, may contain sensitive information
 .env
 .env.*
