@@ -1,13 +1,5 @@
-from abc import ABC, abstractmethod
-from asyncpg import create_pool, Pool
-from asyncio import Lock
-
-class AsyncDao(ABC):
-	_pool:Pool | None = None
-	_initLock : Lock | None = None
-
-	@classmethod
-	async def _init_pool(cls):
+"""classmethod
+	async def _init_pool(cls) -> Pool:
 		if cls._pool is None:
 			if cls._initLock is None:
 				cls._initLock = Lock()		# Singleton pattern
@@ -25,30 +17,24 @@ class AsyncDao(ABC):
 					if cls._pool is None:
 						raise Exception("Failed to create database connection pool")				
 		return cls._pool
-	
-	def __init__(self):
-		if self._pool is None:
-			raise Exception("Database connection pool is not initialized. Call AsyncDao.init_pool() before using.")
-		self.pool = self._pool
+"""
 
-	@property
-	async def pool(self) -> Pool:
-		if self.__class__._pool is None:
-			await self.__class__._init_pool()
-		return self.__class__._pool
+from abc import ABC
+from collections.abc import AsyncGenerator
+from asyncpg import Pool
+from asyncpg.pool import PoolConnectionProxy
+from contextlib import asynccontextmanager
 
-	def close(cls):
-		if cls._pool is not None:
-			cls._pool.close()
-			cls._pool = None
+class AsyncDao(ABC):
 
-	async def __del__(self):
-		self.close()
+    def __init__(self, pool: Pool) -> None:
+        self.pool = pool
 
-	@abstractmethod
-	async def getInfo(self):
-		pass
+    @asynccontextmanager
+    async def acquire(self) -> AsyncGenerator[PoolConnectionProxy, None]:
+        async with self.pool.acquire() as pconn:
+            yield pconn
 
-	@abstractmethod
-	async def setInfo(self, data):
-		pass
+    async def close(self):
+        # 不由 DAO 關閉 pool
+        pass
