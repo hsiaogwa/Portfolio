@@ -4,10 +4,19 @@ from quart import Quart, send_from_directory, request, Response
 from Util import ClientIp
 from Dao.AsyncUserDao import UserDao
 from aiohttp import ClientSession
+from asyncpg import Pool
 
 app = Quart(__name__)
 
 react = os.path.join(os.path.dirname(__file__), "react")
+
+@app.before_serving
+async def init_pool()：
+	pass
+
+@app.after_serving
+async def clear_pool():
+	pass # TODO
 
 @app.route("/")
 async def sentIndex():
