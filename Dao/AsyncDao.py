@@ -44,7 +44,7 @@ class AsyncDao[T](ABC):
         pass
     
     @abstractmethod
-    async def setInfo(self, key: str, value: T) -> bool:
+    async def setInfo(self, key: str, value: str) -> bool:
         pass
 
     @abstractmethod
