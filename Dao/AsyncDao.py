@@ -19,23 +19,16 @@
         return cls._pool
 """
 
-from abc import ABC
+from abc import ABC, abstractmethod
 from collections.abc import AsyncGenerator
-from asyncio import Lock
 from asyncpg import Pool
 from asyncpg.pool import PoolConnectionProxy
 from contextlib import asynccontextmanager
 
-class AsyncDao(ABC):
+class AsyncDao[T](ABC):
 
     def __init__(self, pool: Pool) -> None:
         self.pool = pool
-        self.__class__.__init_lock()
-
-    @classmethod
-    def __init_lock(cls):
-        if not hasattr(cls, "_initLock"):
-            cls._initLock = Lock()
 
     @asynccontextmanager
     async def acquire(self) -> AsyncGenerator[PoolConnectionProxy, None]:
@@ -45,3 +38,15 @@ class AsyncDao(ABC):
     async def close(self):
         # 不由 DAO 關閉 pool
         raise NotImplementedError("Should not close the connection pool in DAO class")
+    
+    @abstractmethod
+    async def getInfo(self, pconn: PoolConnectionProxy | None = None) -> T | None:
+        pass
+    
+    @abstractmethod
+    async def setInfo(self, key: str, value: T) -> bool:
+        pass
+
+    @abstractmethod
+    async def pushNew(self, obj: T) -> bool:
+        pass

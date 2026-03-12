@@ -1,10 +1,14 @@
 import os
 from datetime import datetime
+from flask.cli import load_dotenv
 from quart import Quart, send_from_directory, request, Response
 from Util import ClientIp
 from Dao.AsyncUserDao import UserDao
 from aiohttp import ClientSession
-from asyncpg import Pool
+from asyncpg import Pool, Record, create_pool
+
+load_dotenv(path="/workdir/tmp/.env")
+print(f"Environment variables loaded from .env file...{dict(os.environ)}")
 
 app = Quart(__name__)
 
@@ -12,11 +16,20 @@ react = os.path.join(os.path.dirname(__file__), "react")
 
 @app.before_serving
 async def init_pool():
-    pass # TODO init with Lock
+    global pool
+    pool: Pool[Record] = await create_pool(
+        user=os.getenv("SQL_USER"),
+        password=os.getenv("SQL_PASSWORD"),
+        database=os.getenv("SQL_NAME"),
+        host=os.getenv("SQL_HOST"),
+        port=int(os.getenv("SQL_PORT_EXPOSE", 5432)),
+        min_size=3,
+        max_size=10
+    )
 
 @app.after_serving
 async def clear_pool():
-    pass # TODO
+    pool.close()
 
 @app.route("/")
 async def sentIndex():
@@ -53,6 +66,7 @@ async def sendFavicon():
 
 @app.route("/item")
 async def sendItem():
+    
     return Response("[]", content_type="application/json")
 
 @app.route("/login", methods=["POST"])

@@ -1,9 +1,10 @@
 from asyncpg import Pool, Record
-
-from Dao.AsyncDao import AsyncDao
 from asyncpg.pool import PoolConnectionProxy
 
-class UserDao(AsyncDao):
+from Dao.AsyncDao import AsyncDao
+from Entity.User import User
+
+class AsyncUserDao(AsyncDao[User]):
 
     uid: str
     
@@ -18,7 +19,7 @@ class UserDao(AsyncDao):
         async with self.acquire() as pconn_tmp:
             return await pconn_tmp.fetchrow(query, self.uid)
 
-    async def setInfo(self, key, value):
+    async def setInfo(self, key, value) -> bool:
         # TODO
         pass
 

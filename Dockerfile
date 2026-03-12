@@ -4,6 +4,7 @@ WORKDIR /workdir
 # install dependencies
 RUN mkdir /workdir/tmp
 COPY requirements.txt /workdir/tmp/requirements.txt
+COPY .env /workdir/tmp/.env
 RUN pip install -r /workdir/tmp/requirements.txt
 COPY app /workdir/app
 COPY Util /workdir/Util

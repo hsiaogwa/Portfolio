@@ -1,5 +1,19 @@
 services:
 
+  postgres:
+    image: postgres:16
+    container_name: ${SQL_CONTAINTER_NAME}
+    restart: always
+    environment:
+      POSTGRES_USER: ${SQL_USER}
+      POSTGRES_PASSWORD: ${SQL_PASSWORD}
+      POSTGRES_DB: ${SQL_DB}
+    ports:
+      - "${SQL_PORT}:${SQL_PORT_EXPOSE}"
+    volumes:
+      - ./app/SQL/data:/var/lib/postgresql/data
+      - ./app/SQL/setup.postgre.sql:/docker-entrypoint-initdb.d/setup.postgre.sql
+
   appIndex:
     build:
       context: .
@@ -7,7 +21,7 @@ services:
       target: Index
     image: webapp/index:1.0
     ports:
-      - "8000-8004:8000-8004"
+      - "${APP_INDEX_PORT}-${APP_INDEX_PORT + APP_INDEX_PORT_LEN - 1}:${API_INDEX_PORT_EXPOSE}-${API_INDEX_PORT_EXPOSE + APP_INDEX_PORT_LEN - 1}"
 
   appGame:
     build:
@@ -16,7 +30,7 @@ services:
       target: Game
     image: webapp/game:1.0
     ports:
-      - "8010-8014:8010-8014"
+      - "${APP_GAME_PORT}-${APP_GAME_PORT + APP_GAME_PORT_LEN - 1}:${API_GAME_PORT_EXPOSE}-${API_GAME_PORT_EXPOSE + APP_GAME_PORT_LEN - 1}"
 
   apiStyleSheet:
     build:
@@ -25,4 +39,4 @@ services:
       target: StyleSheet
     image: webapp/stylesheet:1.0
     ports:
-      - "8020-8024:8020-8024"
+      - "${APP_STYLESHEET_PORT}-${APP_STYLESHEET_PORT + APP_STYLESHEET_PORT_LEN - 1}:${API_STYLESHEET_PORT_EXPOSE}-${API_STYLESHEET_PORT_EXPOSE + APP_STYLESHEET_PORT_LEN - 1}"

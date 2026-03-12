@@ -1,9 +1,6 @@
 import datetime
 
 class Item:
-    import datetime
-
-class Item:
 
     __slots__ = ['id', '_type', '_data', '_date']
 

@@ -2,9 +2,6 @@ from datetime import date
 import json
 
 class User:
-    from datetime import date
-
-class User:
     __slots__ = ['_id', '_country', '_email', '_description', '_name', '_headp', '_gender', '_age', '_birthday', '_theme']
 
     FIELD_TYPES = {

@@ -7,8 +7,8 @@
 -- (1) Install PostgreSQL
 -- (2) Release the following notes begin with '---'
 -- (3) run in bash / pwsh: $ psql -f setup.postgres.sql
---- create database Webapp;
---- \c Webapp
+--- create database WebsitePortfolio;
+--- \c WebsitePortfolio
 
 --  Tables  --
 create table Person (
@@ -110,7 +110,7 @@ create table ItemContent (
 
 --  Procedures and Functions  --
 create function getItems (
-	ittype itemtype,
+	itype itemtype default null,
 	count int default 8
 )
 returns table (
@@ -123,14 +123,18 @@ returns table (
 language sql
 as $body$
 begin
-	select Item.itype as 'TypeID', Item.id as 'ItemId', Item.title as 'ItemTitle', Person.name as 'Author', Person.headp as 'AuthorHead'
-		from Item
-			left outer join Auth
-				on Item.itype = Auth.itype and Item.id = Auth.itemid and Item.removed = 'false' and Auth.role = 0 and Item.itype = ittype
-			left outer join Person
-				on Auth.person = Person.id
-		order by Item.id desc
-		limit count;
+	select t.*, Person.name as Author, Person.headp as AuthorHead
+		from (
+			select Item.itype as TypeID, Item.id as ItemId, Item.title as ItemTitle
+				row_number() over (partition by Item.itype order by Item.id desc) as rn
+				from Item
+				where removed = 'false' and (getItems.itype is null or Item.itype = getItems.itype)
+		) t
+		left outer join Auth
+			on t.TypeID = Auth.itype and t.ItemId = Auth.itemid and Auth.role = 0
+		left outer join Person
+			on Auth.person = Person.id
+		where rn <= count;
 end;
 $body$;
 
